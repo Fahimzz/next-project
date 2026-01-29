@@ -83,9 +83,10 @@ function ListDemo() {
 }
 
 function EffectDemo() {
-  const [time, setTime] = useState(new Date());
+  const [time, setTime] = useState<Date | null>(null);
 
   useEffect(() => {
+    setTime(new Date());
     const id = setInterval(() => setTime(new Date()), 1000);
     return () => clearInterval(id);
   }, []);
@@ -96,7 +97,7 @@ function EffectDemo() {
         Live Clock
       </div>
       <div className="mt-2 font-[var(--font-display)] text-2xl text-amber-900">
-        {time.toLocaleTimeString()}
+        {time ? time.toLocaleTimeString() : "--:--:--"}
       </div>
     </div>
   );
